@@ -124,7 +124,7 @@
                 let neutralItem = myHero.GetItemByIndex(16);
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
-                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 9, null, neutralItem, 3, myHero);
+                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 16, null, neutralItem, 3, myHero);
                         console.log(888);
                     }
                 }
