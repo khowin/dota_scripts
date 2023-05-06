@@ -106,16 +106,29 @@
         Menu.GetFolder(PATH).SetImage('panorama/images/items/stormcrafter_png.vtex_c');
         Menu.GetFolder(['Custom Scripts', 'Abuse']).SetImage('~/menu/40x40/abuse.png');
 
+        var globalHuj = false;
         Abuse_StormCrafter.OnUpdate = () => {
+            if (Bind.IsKeyDown()) {
+                if (globalHuj) {
+                    console.log('viklu4ili global huj')
+                    globalHuj = false;
+                } else {
+                    console.log('vklu4ili global huj')
+                    globalHuj = true;
+                }
+            }
+
             if (!myHero)
                 return;
-            if (Bind.IsKeyDown() && Engine.OnceAt(0.105)) {
+
+            if (globalHuj && Engine.OnceAt(0.100)) {
                 // 16 slot neutral itema
                 let neutralItem = myHero.GetItemByIndex(16);
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
                         EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 8, null, neutralItem, 3, myHero);
-                        console.log('kladem v stash', 333);
+                        console.log('kladem v stash', 335);
+                        console.log(globalHuj, 'globalHuj');
                     }
                 }
                 else {
@@ -123,7 +136,8 @@
                     if (neutralItem) {
                         if (neutralItem.GetName() == 'item_stormcrafter') {
                             EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 16, null, neutralItem, 3, myHero);
-                            console.log('kladem v neutral slot', 773);
+                            console.log('kladem v neutral slot', 775);
+                            console.log(globalHuj, 'globalHuj');
                         }
                     }
                 }
