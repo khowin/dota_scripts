@@ -105,9 +105,6 @@
         let Bind = Menu.AddKeyBind(PATH, 'Bind', Enum.ButtonCode.KEY_NONE);
         Menu.GetFolder(PATH).SetImage('panorama/images/items/stormcrafter_png.vtex_c');
         Menu.GetFolder(['Custom Scripts', 'Abuse']).SetImage('~/menu/40x40/abuse.png');
-
-        var globalHuj = false;
-
         function Dist2D(vec1, vec2) {
             if (vec1 && vec2) {
                 let pos1 = (vec1.x ? (vec1) : (vec1.GetAbsOrigin ? (vec1.GetAbsOrigin()) : (0)));
@@ -116,26 +113,13 @@
             }
             return -1;
         }
-
         function PickItem(self, item, ex) {
             EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_PICKUP_ITEM, item, null, null, 3, self, ex || false, false);
         }
-
         Abuse_StormCrafter.OnUpdate = () => {
-            if (Bind.IsKeyDown()) {
-                if (globalHuj) {
-                    console.log('viklu4ili global huj')
-                    globalHuj = false;
-                } else {
-                    console.log('vklu4ili global huj')
-                    globalHuj = true;
-                }
-            }
-
             if (!myHero)
                 return;
-
-            if (globalHuj && Engine.OnceAt(0.100)) {
+            if (Bind.IsKeyDown() && Engine.OnceAt(0.135)) {
                 let neutralItem = myHero.GetItemByIndex(16);
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
