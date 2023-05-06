@@ -127,7 +127,7 @@
                         for (let i = 0; i < 10; i++) {
                             console.log('zopa huj');
                         }
-                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_DROP_ITEM, neutralItem, null, neutralItem, 3, myHero);
+                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_DROP_ITEM, null, null, neutralItem, 3, myHero);
                     }
                 }
                 else {
