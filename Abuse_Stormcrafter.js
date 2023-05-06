@@ -123,7 +123,7 @@ var abuse_stormCrafter;
             let neutralItem = myHero.GetItemByIndex(16);
             if (neutralItem) {
                 if (neutralItem.GetName() == 'item_stormcrafter') {
-                    EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, myHero.GetBackpackSlot(0), null, null, 3, myHero);
+                    EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, null, null, null, 3, myHero, neutralItem.GetIndex(), false);
                 }
             }
             else {
