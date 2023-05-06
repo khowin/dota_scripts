@@ -105,17 +105,7 @@ var abuse_stormCrafter;
     let Bind = Menu.AddKeyBind(PATH, 'Bind', Enum.ButtonCode.KEY_NONE);
     Menu.GetFolder(PATH).SetImage('panorama/images/items/stormcrafter_png.vtex_c');
     Menu.GetFolder(['Custom Scripts', 'Abuse']).SetImage('~/menu/40x40/abuse.png');
-    function Dist2D(vec1, vec2) {
-        if (vec1 && vec2) {
-            let pos1 = (vec1.x ? (vec1) : (vec1.GetAbsOrigin ? (vec1.GetAbsOrigin()) : (0)));
-            let pos2 = (vec2.x ? (vec2) : (vec2.GetAbsOrigin ? (vec2.GetAbsOrigin()) : (0)));
-            return pos1 && pos2 && pos1.sub(pos2).Length2D();
-        }
-        return -1;
-    }
-    function PickItem(self, item, ex) {
-        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_PICKUP_ITEM, item, null, null, 3, self, ex || false, false);
-    }
+
     Abuse_StormCrafter.OnUpdate = () => {
         if (!myHero)
             return;
@@ -123,14 +113,18 @@ var abuse_stormCrafter;
             let neutralItem = myHero.GetItemByIndex(16);
             if (neutralItem) {
                 if (neutralItem.GetName() == 'item_stormcrafter') {
-                    EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_DROP_ITEM, null, myHero.GetAbsOrigin(), neutralItem, 3, myHero);
+                    EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, null, null, null, 3, myHero, neutralItem.GetIndex(), false);
                 }
             }
             else {
-                let hasDropStorm = EntitySystem.GetPhysicalItemsList()
-                    .filter(x => x.IsExist() && Dist2D(myHero, x) <= 150 && x.GetItem() && x.GetItem().GetName() == 'item_stormcrafter')[0];
-                if (hasDropStorm) {
-                    PickItem(myHero, hasDropStorm);
+                let hasStormInStash = false;
+                for (let i = 6; i < 12; i++) {
+                    let item = myHero.GetItemByIndex(i);
+                    if (item && item.GetName() === 'item_stormcrafter') {
+                        hasStormInStash = true;
+                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, null, null, null, 16, myHero, item.GetIndex(), false);
+                        break;
+                    }
                 }
             }
         }
@@ -142,7 +136,6 @@ var abuse_stormCrafter;
     };
     RegisterScript(Abuse_StormCrafter);
 })(abuse_stormCrafter || (abuse_stormCrafter = {}));
-
 
 /***/ }),
 
