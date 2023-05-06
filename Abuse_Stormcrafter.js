@@ -116,9 +116,11 @@
             }
             return -1;
         }
+
         function PickItem(self, item, ex) {
             EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_PICKUP_ITEM, item, null, null, 3, self, ex || false, false);
         }
+
         Abuse_StormCrafter.OnUpdate = () => {
             if (Bind.IsKeyDown()) {
                 if (globalHuj) {
@@ -133,12 +135,11 @@
             if (!myHero)
                 return;
 
-            if (Bind.IsKeyDown() && Engine.OnceAt(0.100)) {
-                // 16 slot neutral itema
+            if (globalHuj && Engine.OnceAt(0.100)) {
                 let neutralItem = myHero.GetItemByIndex(16);
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
-                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_DROP_ITEM, null, null, neutralItem, 3, myHero);
+                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_DROP_ITEM, null, myHero.GetAbsOrigin(), neutralItem, 3, myHero);
                     }
                 }
                 else {
