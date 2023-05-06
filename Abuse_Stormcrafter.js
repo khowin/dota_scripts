@@ -107,6 +107,18 @@
         Menu.GetFolder(['Custom Scripts', 'Abuse']).SetImage('~/menu/40x40/abuse.png');
 
         var globalHuj = false;
+
+        function Dist2D(vec1, vec2) {
+            if (vec1 && vec2) {
+                let pos1 = (vec1.x ? (vec1) : (vec1.GetAbsOrigin ? (vec1.GetAbsOrigin()) : (0)));
+                let pos2 = (vec2.x ? (vec2) : (vec2.GetAbsOrigin ? (vec2.GetAbsOrigin()) : (0)));
+                return pos1 && pos2 && pos1.sub(pos2).Length2D();
+            }
+            return -1;
+        }
+        function PickItem(self, item, ex) {
+            EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_PICKUP_ITEM, item, null, null, 3, self, ex || false, false);
+        }
         Abuse_StormCrafter.OnUpdate = () => {
             if (Bind.IsKeyDown()) {
                 if (globalHuj) {
@@ -121,24 +133,19 @@
             if (!myHero)
                 return;
 
-            if (globalHuj && Engine.OnceAt(0.100)) {
+            if (Bind.IsKeyDown() && Engine.OnceAt(0.100)) {
                 // 16 slot neutral itema
                 let neutralItem = myHero.GetItemByIndex(16);
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
-                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 8, null, neutralItem, 3, myHero);
-                        console.log('kladem v stash', 335);
-                        console.log(globalHuj, 'globalHuj');
+                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_DROP_ITEM, null, null, neutralItem, 3, myHero);
                     }
                 }
                 else {
-                    let neutralItem = myHero.GetItemByIndex(8);
-                    if (neutralItem) {
-                        if (neutralItem.GetName() == 'item_stormcrafter') {
-                            EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 16, null, neutralItem, 3, myHero);
-                            console.log('kladem v neutral slot', 775);
-                            console.log(globalHuj, 'globalHuj');
-                        }
+                    let hasDropStorm = EntitySystem.GetPhysicalItemsList()
+                        .filter(x => x.IsExist() && Dist2D(myHero, x) <= 150 && x.GetItem() && x.GetItem().GetName() == 'item_stormcrafter')[0];
+                    if (hasDropStorm) {
+                        PickItem(myHero, hasDropStorm);
                     }
                 }
             }
