@@ -109,13 +109,13 @@
         Abuse_StormCrafter.OnUpdate = () => {
             if (!myHero)
                 return;
-            if (Bind.IsKeyDown() && Engine.OnceAt(0.105)) {
+            if (Bind.IsKeyDown() && Engine.OnceAt(0.99)) {
                 // 16 slot neutral itema
                 let neutralItem = myHero.GetItemByIndex(16);
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
                         EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 8, null, neutralItem, 3, myHero);
-                        console.log('kladem v stash', 335);
+                        console.log('kladem v stash', 336);
                     }
                 }
                 else {
@@ -123,7 +123,7 @@
                     if (neutralItem) {
                         if (neutralItem.GetName() == 'item_stormcrafter') {
                             EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 16, null, neutralItem, 3, myHero);
-                            console.log('kladem v neutral slot', 775);
+                            console.log('kladem v neutral slot', 776);
                         }
                     }
                 }
