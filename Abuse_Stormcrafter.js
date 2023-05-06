@@ -122,7 +122,7 @@
             if (Bind.IsKeyDown() && Engine.OnceAt(0.135)) {
                 let neutralItem = myHero.GetItemByIndex(16);
                 if (neutralItem) {
-                    if (neutralItem.GetName() == 'item_stormcrafter') {
+                    if (neutralItem.GetName() == 'item_defiant_shell') {
                         EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_DROP_ITEM, null, myHero.GetAbsOrigin(), neutralItem, 3, myHero);
                     }
                 }
