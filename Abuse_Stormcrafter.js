@@ -114,16 +114,18 @@
                 let neutralItem = myHero.GetItemByIndex(16);
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
-                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 8, Vector(0, 0, 0), neutralItem, 3, myHero);
-                        console.log('kladem v stash', 339);
+                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 8, null, neutralItem, 3, myHero);
+                        console.log('kladem v stash', 539);
+                        EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_STOP, null, null, null, 3, myHero);
                     }
                 }
                 else {
                     let neutralItem = myHero.GetItemByIndex(8);
                     if (neutralItem) {
                         if (neutralItem.GetName() == 'item_stormcrafter') {
-                            EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 16, Vector(0, 0, 0), neutralItem, 3, myHero);
-                            console.log('kladem v neutral slot', 779);
+                            EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 16, null, neutralItem, 3, myHero);
+                            console.log('kladem v neutral slot', 979);
+                            EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_STOP, null, null, null, 3, myHero);
                         }
                     }
                 }
