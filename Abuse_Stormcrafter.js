@@ -125,7 +125,7 @@
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
                         EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 16, null, neutralItem, 3, myHero);
-                        console.log(888);
+                        console.log(889);
                     }
                 }
                 else {
