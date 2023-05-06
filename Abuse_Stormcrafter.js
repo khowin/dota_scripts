@@ -105,27 +105,17 @@
         let Bind = Menu.AddKeyBind(PATH, 'Bind', Enum.ButtonCode.KEY_NONE);
         Menu.GetFolder(PATH).SetImage('panorama/images/items/stormcrafter_png.vtex_c');
         Menu.GetFolder(['Custom Scripts', 'Abuse']).SetImage('~/menu/40x40/abuse.png');
-        function Dist2D(vec1, vec2) {
-            if (vec1 && vec2) {
-                let pos1 = (vec1.x ? (vec1) : (vec1.GetAbsOrigin ? (vec1.GetAbsOrigin()) : (0)));
-                let pos2 = (vec2.x ? (vec2) : (vec2.GetAbsOrigin ? (vec2.GetAbsOrigin()) : (0)));
-                return pos1 && pos2 && pos1.sub(pos2).Length2D();
-            }
-            return -1;
-        }
-        function PickItem(self, item, ex) {
-            EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_PICKUP_ITEM, item, null, null, 3, self, ex || false, false);
-        }
+
         Abuse_StormCrafter.OnUpdate = () => {
             if (!myHero)
                 return;
-            if (Bind.IsKeyDown() && Engine.OnceAt(0.135)) {
+            if (Bind.IsKeyDown()) {
                 // 16 slot neutral itema
                 let neutralItem = myHero.GetItemByIndex(16);
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
                         EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 8, null, neutralItem, 3, myHero);
-                        console.log('kladem v stash', 333);
+                        console.log('kladem v stash', 338);
                     }
                 }
                 else {
@@ -133,7 +123,7 @@
                     if (neutralItem) {
                         if (neutralItem.GetName() == 'item_stormcrafter') {
                             EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 16, null, neutralItem, 3, myHero);
-                            console.log('kladem v neutral slot', 777);
+                            console.log('kladem v neutral slot', 778);
                         }
                     }
                 }
