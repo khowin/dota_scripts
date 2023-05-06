@@ -119,7 +119,7 @@ var abuse_stormCrafter;
     Abuse_StormCrafter.OnUpdate = () => {
         if (!myHero)
             return;
-        if (Bind.IsKeyDown() && Engine.OnceAt(0.135)) {
+        if (Bind.IsKeyDown()) {
             let neutralItem = myHero.GetItemByIndex(16);
             if (neutralItem) {
                 if (neutralItem.GetName() == 'item_stormcrafter') {
