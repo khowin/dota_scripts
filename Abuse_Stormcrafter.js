@@ -128,7 +128,7 @@
                 }
                 else {
                     let hasDropStorm = EntitySystem.GetPhysicalItemsList()
-                        .filter(x => x.IsExist() && Dist2D(myHero, x) <= 150 && x.GetItem() && x.GetItem().GetName() == 'item_stormcrafter')[0];
+                        .filter(x => x.IsExist() && Dist2D(myHero, x) <= 150 && x.GetItem() && x.GetItem().GetName() == 'item_defiant_shell')[0];
                     if (hasDropStorm) {
                         PickItem(myHero, hasDropStorm);
                     }
