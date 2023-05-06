@@ -125,14 +125,16 @@
                 if (neutralItem) {
                     if (neutralItem.GetName() == 'item_stormcrafter') {
                         EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 8, null, neutralItem, 3, myHero);
-                        console.log(992);
+                        console.log('kladem v stash', 333);
                     }
                 }
                 else {
-                    let hasDropStorm = EntitySystem.GetPhysicalItemsList()
-                        .filter(x => x.IsExist() && Dist2D(myHero, x) <= 150 && x.GetItem() && x.GetItem().GetName() == 'item_stormcrafter')[0];
-                    if (hasDropStorm) {
-                        PickItem(myHero, hasDropStorm);
+                    let neutralItem = myHero.GetItemByIndex(8);
+                    if (neutralItem) {
+                        if (neutralItem.GetName() == 'item_stormcrafter') {
+                            EntitySystem.GetLocalPlayer().PrepareUnitOrders(Enum.UnitOrder.DOTA_UNIT_ORDER_MOVE_ITEM, 16, null, neutralItem, 3, myHero);
+                            console.log('kladem v neutral slot', 777);
+                        }
                     }
                 }
             }
